@@ -1,6 +1,6 @@
 ﻿namespace DGII_Taxpayers.Infrastructure.Options;
 
-internal class DatabaseOptions
+public class DatabaseOptions
 {
     public const string sectionName = "DatabaseOptions";
 
