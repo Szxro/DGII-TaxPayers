@@ -6,10 +6,10 @@ public class CreatePersonTypeCommandValidator : AbstractValidator<CreatePersonTy
 {
     public CreatePersonTypeCommandValidator()
     {
-        RuleFor(rule => rule.typeName).NotEmpty().WithMessage("The {PropertyName} cant be empty");
+        RuleFor(rule => rule.typeName).NotEmpty().WithMessage("El campo {PropertyName} no puede estar vacio");
 
-        RuleFor(rule => rule.typeName).NotNull().WithMessage("The {PropertyName} cant be null");
+        RuleFor(rule => rule.typeName).NotNull().WithMessage("El campo {PropertyName} no puede estar nulo");
 
-        RuleFor(rule => rule.typeName).Must(x => !string.IsNullOrEmpty(x)).WithMessage("The {PropertyName} cant be empty or null");
+        RuleFor(rule => rule.typeName).Must(x => !string.IsNullOrEmpty(x)).WithMessage("El campo {PropertyName} no puede estar vacio o nulo");
     }
 }

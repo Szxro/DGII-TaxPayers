@@ -5,7 +5,7 @@ namespace DGII_Taxpayers.Application.Common.Exceptions;
 public class ValidationException : Exception
 {
     public ValidationException()
-        : base("One or more validation failures have occurred.")
+        : base("Se han producido uno o mas errores de validacion")
     {
         Errors = new List<Error[]>();
     }

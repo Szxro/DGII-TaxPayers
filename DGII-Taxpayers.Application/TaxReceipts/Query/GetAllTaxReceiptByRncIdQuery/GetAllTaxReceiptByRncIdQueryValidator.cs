@@ -6,8 +6,8 @@ public class GetAllTaxReceiptByRncIdQueryValidator : AbstractValidator<GetAllTax
 {
     public GetAllTaxReceiptByRncIdQueryValidator()
     {
-        RuleFor(x => x.rncId).NotEmpty().WithMessage("The {PropertyName} cant be empty");
+        RuleFor(x => x.rncId).NotEmpty().WithMessage("El campo {PropertyName} no puede estar vacio");
 
-        RuleFor(x => x.rncId).NotNull().WithMessage("The {PropertyName} cant be null");
+        RuleFor(x => x.rncId).NotNull().WithMessage("El campo {PropertyName} no puede estar vacio");
     }
 }

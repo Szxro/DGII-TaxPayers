@@ -77,5 +77,5 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>
     }
 
     private Error[] CreateValidationErrors(ValidationFailure[] validationFailures) =>
-        validationFailures.Select(validationErrors => Error.Validation(validationErrors.PropertyName, validationErrors.ErrorMessage)).ToArray();
+        validationFailures.Select(validationErrors => Error.Validation(validationErrors.ErrorCode, validationErrors.ErrorMessage)).ToArray();
 }
