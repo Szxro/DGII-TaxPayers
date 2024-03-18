@@ -11,9 +11,16 @@ public class CacheService : ICaheService
     {
         _memoryCache = memoryCache;
     }
-    public T? GetSync<T>(string key)
+    public object? GetSync(string key)
     {
-        return _memoryCache.Get<T>(key);
+        var result = _memoryCache.TryGetValue(key,out object? value);
+
+        if (!result)
+        {
+            return default;
+        }
+
+        return value;
     }
 
     public void RemoveSync(string key)

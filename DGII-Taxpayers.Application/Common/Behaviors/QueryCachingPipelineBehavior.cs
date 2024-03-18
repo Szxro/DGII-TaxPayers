@@ -21,7 +21,7 @@ internal class QueryCachingPipelineBehavior<TRequest, TResponse>
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        TResponse? cachedResult = _caheService.GetSync<TResponse>(request.CahedKey);
+        object? cachedResult = _caheService.GetSync(request.CahedKey);
 
         string requestName = typeof(TRequest).Name;
 
@@ -29,7 +29,7 @@ internal class QueryCachingPipelineBehavior<TRequest, TResponse>
         {
             _logger.LogInformation("Cache hit for the request {requestName}",requestName);
 
-            return cachedResult;
+            return (TResponse)cachedResult;
         }
 
         _logger.LogInformation("Cache miss for the request {requestName}",requestName);
