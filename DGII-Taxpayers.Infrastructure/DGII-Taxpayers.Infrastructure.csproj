@@ -25,4 +25,8 @@
   <ItemGroup>
     <ProjectReference Include="..\DGII-Taxpayers.Application\DGII-Taxpayers.Application.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Persistence\Migrations\" />
+  </ItemGroup>
 </Project>
