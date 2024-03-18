@@ -17,7 +17,7 @@ public sealed class Error
 
     public static readonly Error None = new(string.Empty,string.Empty,ErrorType.None);
 
-    public static readonly Error ValidationError = new Error("Validation.Error", "One or more validation failures have occurred", ErrorType.Validation);
+    public static readonly Error ValidationError = new Error("Validation.Error", "Se han producido uno o mas errores de validacion", ErrorType.Validation);
 
     public static Error Validation(string errorCode, string errorDescription) => new(errorCode, errorDescription, ErrorType.Validation);
 
