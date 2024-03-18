@@ -15,6 +15,13 @@ public class AppDbContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<decimal>().HavePrecision(16,2);
+
+        base.ConfigureConventions(configurationBuilder);
+    }
+
     public DbSet<TaxPayer> TaxPayer => Set<TaxPayer>();
 
     public DbSet<TaxReceipt> TaxReceipt => Set<TaxReceipt>();
