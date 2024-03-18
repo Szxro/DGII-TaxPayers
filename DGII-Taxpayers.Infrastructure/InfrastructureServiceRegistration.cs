@@ -1,6 +1,7 @@
 ﻿using DGII_Taxpayers.Domain.Contracts;
 using DGII_Taxpayers.Infrastructure.Common;
 using DGII_Taxpayers.Infrastructure.Options;
+using DGII_Taxpayers.Infrastructure.Options.Validations;
 using DGII_Taxpayers.Infrastructure.Persistence;
 using DGII_Taxpayers.Infrastructure.Persistence.Interceptors;
 using DGII_Taxpayers.Infrastructure.Repositories;
@@ -8,6 +9,7 @@ using DGII_Taxpayers.Infrastructure.Services;
 using DGII_Taxpayers.Infrastructure.Validators;
 using FluentValidation;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,10 +21,10 @@ namespace DGII_Taxpayers.Infrastructure
 {
     public static class InfrastructureServiceRegistration
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services,IConfiguration configuration,IWebHostEnvironment environment)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services,IWebHostEnvironment environment)
         {
             services.AddOptions<DatabaseOptions>()
-                    .Configure(options => configuration.GetSection(DatabaseOptions.sectionName).Bind(options));
+                    .BindConfiguration(DatabaseOptions.sectionName);
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
@@ -49,13 +51,31 @@ namespace DGII_Taxpayers.Infrastructure
                 }
             });
 
+            services.AddMemoryCache();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IDateService, DateService>();
-            services.AddTransient<IAppDbInitializerService, AppDbInitializerService>();
-            services.AddTransient<IPersonTypeRepository, PersonTypeRepository>();
+            services.AddSingleton<ICaheService, CacheService>();
+            services.AddScoped<IAppDbInitializerService, AppDbInitializerService>();
+            services.AddScoped<IPersonTypeRepository, PersonTypeRepository>();
+            services.AddScoped<ITaxPayerRepository, TaxPayerRepository>();
+            services.AddScoped<ITaxReceiptRepository, TaxReceiptRepository>();
 
 
             return services;
+        }
+
+        public static async Task InitializeDatabaseAsync(this IServiceProvider serviceProvider)
+        {
+            using var scope = serviceProvider.CreateScope();
+
+            IAppDbInitializerService initializer = scope.ServiceProvider.GetRequiredService<IAppDbInitializerService>();
+
+            await initializer.ConnectAsync();
+
+            await initializer.MigrateAsync();
+
+            await initializer.SeedAsync();
         }
     }
 }
