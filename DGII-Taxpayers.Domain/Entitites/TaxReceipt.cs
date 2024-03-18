@@ -6,11 +6,11 @@ public class TaxReceipt : AuditableEntity
 {
     public int TaxPayerId { get; set; }
 
-    public TaxPayer? TaxPayer { get; }
+    public TaxPayer TaxPayer { get; set; } = new(); 
 
     public string NCF { get; set; } = string.Empty;
 
     public double Amount { get; set; }
 
-    public double Itbis18 { get; set; }
+    public double Itbis18 { get; set; } 
 }

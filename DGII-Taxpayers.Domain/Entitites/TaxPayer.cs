@@ -17,7 +17,7 @@ public class TaxPayer : AuditableEntity
 
     public PersonType PersonType { get; set; } = new();
 
-    public bool Status { get; set; }
+    public string Status { get; set; } = string.Empty;
 
     public ICollection<TaxReceipt> TaxReceipts { get; set; }
 }
