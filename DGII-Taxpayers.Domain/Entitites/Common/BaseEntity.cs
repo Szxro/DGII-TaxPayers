@@ -8,20 +8,20 @@ public abstract class BaseEntity
     public int Id { get; set; }
 
     [NotMapped]
-    protected List<IEvent> events = new List<IEvent>();
+    public List<IEvent> DomainEvents = new List<IEvent>();
 
-    public void AddEvent(IEvent @event)
+    public void AddEvent(IEvent domainEvent)
     {
-        events.Add(@event);
+        DomainEvents.Add(domainEvent);
     }
 
-    public void RemoveEvent(IEvent @event)
+    public void RemoveEvent(IEvent domainEvent)
     {
-        events.Remove(@event);
+        DomainEvents.Remove(domainEvent);
     }
 
     public void ClearEvents()
     {
-        events.Clear();
+        DomainEvents.Clear();
     }
 }
