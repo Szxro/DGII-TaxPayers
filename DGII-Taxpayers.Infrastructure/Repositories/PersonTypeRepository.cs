@@ -46,7 +46,7 @@ public class PersonTypeRepository
 
     public async Task<List<PersonTypeDTO>> GetAllPersonType()
     {
-        return await _dbContext.PersonType.Select(x => new PersonTypeDTO() { TypeName = x.TypeName }).ToListAsync();
+        return await _dbContext.PersonType.AsNoTracking().Select(x => new PersonTypeDTO() { TypeName = x.TypeName }).ToListAsync();
     }
 
     public async Task<PersonType?> GetPersonTypeByTypeName(string typeName)

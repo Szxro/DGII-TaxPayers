@@ -38,7 +38,8 @@ public class TaxPayerRepository
 
     public async Task<List<TaxPayerDTO>> GetAllTaxPayer()
     {
-        return await _dbContext.TaxPayer.Include(payer => payer.PersonType)
+        return await _dbContext.TaxPayer.AsNoTracking()
+                                        .Include(payer => payer.PersonType)
                                         .Select(payer => new TaxPayerDTO()
                                         {
                                             RncID = payer.RncID,
