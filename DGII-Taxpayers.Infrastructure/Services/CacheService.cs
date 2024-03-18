@@ -17,7 +17,7 @@ public class CacheService : ICaheService
 
         if (!result)
         {
-            return default;
+            return null;
         }
 
         return value;
