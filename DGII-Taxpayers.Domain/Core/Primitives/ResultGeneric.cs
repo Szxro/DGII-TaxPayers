@@ -2,14 +2,14 @@
 
 namespace DGII_Taxpayers.Domain.Core.Primitives;
 
-public sealed class Result<TData>
+public readonly struct Result<TData>
     : IResult
-    where TData : notnull
+    where TData : class
 {
     public Result(TData? data,bool isSucess,Error error, Error[]? validationErrors)
     {
-        if (!isSucess && error != Error.None
-            || isSucess && error == Error.None)
+        if (!isSucess && error == Error.None
+            || isSucess && error != Error.None)
         {
             throw new ArgumentException("Invalid Error {error}",nameof(error));
         }
@@ -31,7 +31,7 @@ public sealed class Result<TData>
 
     public Error[]? ValidationErrors { get; }
 
-    public static Result<TData> Sucess(TData data) => new(data,true,Error.None,null);
+    public static Result<TData> Success(TData data) => new(data,true,Error.None,null);
 
     public static Result<TData> Failure(Error error) => new(default,false,error,null);
 

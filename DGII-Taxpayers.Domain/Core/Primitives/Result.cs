@@ -2,7 +2,7 @@
 
 namespace DGII_Taxpayers.Domain.Core.Primitives;
 
-public sealed class Result : IResult
+public readonly struct Result : IResult
 {
     public Result(bool isSuccess, Error error, Error[]? validationErrors)
     {
