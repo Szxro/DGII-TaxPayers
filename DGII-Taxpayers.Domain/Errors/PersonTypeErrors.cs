@@ -4,9 +4,9 @@ namespace DGII_Taxpayers.Domain.Errors;
 
 public static class PersonTypeErrors
 {
-    public static readonly Error NotUnique = Error.Conflict("PersonType.Conflit",$"The given typename is not unique ");
+    public static readonly Error NotUnique = Error.Conflict("PersonType.Conflit",$"El nombre de tipo de persona dado no es unica");
 
-    public static readonly Error NotFound = Error.NotFound("PersonType.NotFound", $"The given person type name was not found");
+    public static readonly Error NotFound = Error.NotFound("PersonType.NotFound", $"No se encontro el nombre del tipo de persona indicado");
 
-    public static readonly Error NonePersonTypes = Error.NotFound("PersonType.NotFound","There are none person types register yet");
+    public static readonly Error NonePersonTypes = Error.NotFound("PersonType.NotFound", "No hay ningun tipo de persona registrado todavía");
 }
