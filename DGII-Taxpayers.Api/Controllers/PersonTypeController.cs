@@ -35,9 +35,9 @@ namespace DGII_Taxpayers.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Conflict)]
 
-        public async Task<ActionResult> CreatePersonType(string typeName)
+        public async Task<ActionResult> CreatePersonType(CreatePersonTypeCommand createPersonType)
         {
-            Result result = await _sender.Send(new CreatePersonTypeCommand(typeName));
+            Result result = await _sender.Send(createPersonType);
 
             return result.IsSuccess ? NoContent() : result.ToProblemDetails();
         }
